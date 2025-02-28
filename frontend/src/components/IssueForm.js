@@ -73,7 +73,7 @@ const IssueForm = () => {
   const handleSnackbarClose = () => {
     setSnackbarOpen(false);
 
-    // Navigate to the payment page after the Snackbar closes
+    
     if (issueId) {
       navigate(`/payment/${issueId}`);
     }
@@ -91,7 +91,7 @@ const IssueForm = () => {
               options={vehicles}
               getOptionLabel={(option) =>
                 `${option.make} ${option.model} (${option.year})`
-              } // Fixed string interpolation
+              } 
               onChange={(e, value) =>
                 setFormData({ ...formData, vehicle: value })
               }
@@ -110,7 +110,7 @@ const IssueForm = () => {
             <Autocomplete
               multiple
               options={components}
-              getOptionLabel={(option) => option.name} // Option label without 'New' or 'Old'
+              getOptionLabel={(option) => option.name} 
               onChange={(e, value) =>
                 setFormData({ ...formData, selectedComponents: value })
               }
@@ -136,7 +136,7 @@ const IssueForm = () => {
             />
           </Grid>
 
-          {/* New Checkbox Field */}
+          
           <Grid item xs={12}>
             <FormControlLabel
               control={
