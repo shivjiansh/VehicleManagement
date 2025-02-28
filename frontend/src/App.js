@@ -6,20 +6,21 @@ import ComponentForm from './components/ComponentForm';
 import VehicleForm from './components/VehicleForm';
 import IssueForm from './components/IssueForm';
 import Payment from './components/Payment';
+import Report from './components/Report';
 
 function App() {
   return (
     <Router>
       <CssBaseline />
       <NavBar />
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 4,  }}>
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/components" element={<ComponentForm />} />
           <Route path="/vehicles" element={<VehicleForm />} />
           <Route path="/issues" element={<IssueForm />} />
           <Route path="/payment/:issueId" element={<Payment />} />
-          
+          <Route path="/report" element={<Report />} />
         </Routes>
       </Container>
     </Router>

@@ -23,7 +23,7 @@ function Payment() {
         try {
           if (!issueId || isNaN(issueId)) {
             throw new Error('Invalid service request ID');
-          }
+          } 
 
           const response = await axios.get(
             `http://localhost:8000/api/issues/${issueId}/calculate_total/`,

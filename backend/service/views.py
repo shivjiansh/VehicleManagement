@@ -7,6 +7,7 @@ from django.db.models.functions import TruncMonth, TruncYear, TruncDay
 from rest_framework.decorators import action
 from .models import Component, Vehicle, Issue, Payment
 from .serializers import ComponentSerializer, VehicleSerializer, IssueSerializer, PaymentSerializer
+from decimal import Decimal
 
 class ComponentViewSet(viewsets.ModelViewSet):
     queryset = Component.objects.all()
@@ -16,27 +17,32 @@ class VehicleViewSet(viewsets.ModelViewSet):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
-# service/views.py
+
 class IssueViewSet(viewsets.ModelViewSet):
     queryset = Issue.objects.all()
     serializer_class = IssueSerializer
 
-    # Add this custom action
     @action(detail=True, methods=['get'])
     def calculate_total(self, request, pk=None):
         try:
             issue = self.get_object()
             components = issue.components.all()
-            
+
+           
             component_total = sum(
-                float(comp.new_price) if issue.use_new_components else float(comp.repair_price)
+                Decimal(comp.purchase_price) if issue.use_new_components else Decimal(comp.repair_price)
                 for comp in components
             )
-            labor_cost = 100.00
+
+           
+            labor_cost = Decimal(issue.labor_cost) if issue.labor_cost is not None else Decimal(0.0)
+
+           
             total = component_total + labor_cost
             
+           
             return Response({'total': round(total, 2)})
-        
+
         except Issue.DoesNotExist:
             return Response({'error': 'Issue not found'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -51,17 +57,25 @@ class IssueViewSet(viewsets.ModelViewSet):
         
         return Response({'status': 'Payment successful'}, status=status.HTTP_200_OK)
  
- # views.py
-# class IssueCreateAPIView(CreateAPIView):
-#     queryset = Issue.objects.all()
-#     serializer_class = IssueSerializer
 
-#     def perform_create(self, serializer):
-#         instance = serializer.save()
-#         # Calculate and save total price during creation
-#         total = instance.calculate_total()
-#         instance.total_price = total
-#         instance.save()   
+
+    def perform_create(self, serializer):
+
+        instance = serializer.save()
+        
+
+        component_total = sum(
+            Decimal(comp.purchase_price) if instance.use_new_components else Decimal(comp.repair_price)
+            for comp in instance.components.all()
+        )
+        labor_cost = Decimal(instance.labor_cost) if instance.labor_cost else Decimal(0.0)
+        
+  
+        total_price = component_total + labor_cost
+        
+
+        instance.total_price = total_price
+        instance.save() 
 
 class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()
@@ -69,22 +83,22 @@ class PaymentViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'])
     def revenue(self, request):
-        # Get the time frame from query params (defaults to 'daily')
+        
         time_frame = request.query_params.get('timeFrame', 'daily')
         
-        # Define the truncation function based on the selected time frame
+       
         trunc_function = {
             'daily': TruncDay,
             'monthly': TruncMonth,
             'yearly': TruncYear
-        }.get(time_frame, TruncDay)  # Default to 'daily' if invalid timeframe
+        }.get(time_frame, TruncDay) 
 
-        # Aggregate payments by the selected period
+      
         revenue_data = Payment.objects.annotate(
             period=trunc_function('payment_date')
         ).values('period').annotate(
             total_revenue=Sum('amount')
         ).order_by('period')
 
-        # Return the aggregated data as JSON to the frontend
+      
         return Response(revenue_data)

@@ -28,9 +28,7 @@ class Issue(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     use_new_components = models.BooleanField(default=False) 
 
-    # Remove the custom save method
 
-# service/models.py
 class Payment(models.Model):
     issue = models.ForeignKey(Issue, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
