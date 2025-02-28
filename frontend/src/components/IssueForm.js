@@ -91,7 +91,7 @@ const IssueForm = () => {
               options={vehicles}
               getOptionLabel={(option) =>
                 `${option.make} ${option.model} (${option.year})`
-              }
+              } // Fixed string interpolation
               onChange={(e, value) =>
                 setFormData({ ...formData, vehicle: value })
               }
@@ -110,11 +110,7 @@ const IssueForm = () => {
             <Autocomplete
               multiple
               options={components}
-              getOptionLabel={(option) =>
-                `${option.name} ${
-                  option.use_new_components ? "(New)" : "(Old)"
-                }`
-              }
+              getOptionLabel={(option) => option.name} // Option label without 'New' or 'Old'
               onChange={(e, value) =>
                 setFormData({ ...formData, selectedComponents: value })
               }
