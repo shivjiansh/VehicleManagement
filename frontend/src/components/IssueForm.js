@@ -169,7 +169,7 @@ const IssueForm = () => {
         </Grid>
       </form>
 
-      {/* Snackbar to show messages */}
+   
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={4000}

@@ -16,14 +16,14 @@ function Dashboard() {
       <p
         style={{
           marginTop: "20px",
-          fontSize: "28px", // Larger font size for the welcome text
-          fontWeight: "bold", // Bold text for a more impactful message
-          color: "#333", // Darker text color for contrast
-          textAlign: "center", // Center the text horizontally
-          // Padding for better spacing
-          backgroundColor: "#fff", // Light background for the text
+          fontSize: "28px", 
+          fontWeight: "bold", 
+          color: "#333", 
+          textAlign: "center", 
+          
+          backgroundColor: "#fff", 
 
-          maxWidth: "80%", // Max width to prevent the text from stretching too far
+          maxWidth: "80%", 
         }}
       >
         Welcome to Vehicle Service Center
@@ -42,9 +42,9 @@ function Dashboard() {
       <div
         style={{
           display: "flex",
-          justifyContent: "space-around", // Distribute space evenly between the links
-          width: "100%", // Full width to place links side by side
-          marginTop: "20px", // Spacing above the links
+          justifyContent: "space-around", 
+          width: "100%", 
+          marginTop: "20px", 
         }}
       >
         <a

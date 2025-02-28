@@ -18,9 +18,9 @@ const VehicleForm = () => {
     issue_description: "",
   });
 
-  const [vehicles, setVehicles] = useState([]); // State to store the list of vehicles
+  const [vehicles, setVehicles] = useState([]); 
 
-  // Fetch vehicles when the page loads
+  
   useEffect(() => {
     const fetchVehicles = async () => {
       try {
@@ -34,7 +34,7 @@ const VehicleForm = () => {
     fetchVehicles();
   }, []);
 
-  // Handle form submission to add a new vehicle
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -49,10 +49,9 @@ const VehicleForm = () => {
       );
       alert("Vehicle registered successfully!");
 
-      // After adding the new vehicle, update the list without a page refresh
+     
       setVehicles([...vehicles, response.data]);
 
-      // Clear the form fields
       setVehicleData({
         VIN: "",
         make: "",

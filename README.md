@@ -85,6 +85,9 @@ This will start the React app on http://localhost:3000.
 ![componen added](https://github.com/user-attachments/assets/e47c3527-3376-4a3b-9c49-db376f448ee7)
 
 
+## Video Recording
+https://www.loom.com/share/50a8a7a9172748649dd4cd0df20a7671?sid=6d428eeb-9c24-49e8-be7a-80cca01382a8
+
 ## API Endpoints
 GET /api/vehicles/
 Fetch a list of all vehicles in the system.
