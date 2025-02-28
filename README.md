@@ -24,61 +24,68 @@ Follow these steps to get the application running locally on your machine.
 
 Clone the repository to your local machine.
 
-```bash
+```
 git clone https://github.com/your-username/issue-tracking.git
 cd issue-tracking
-
+```
 ### Step 2: Set up a Virtual Environment
 Create a virtual environment to manage your dependencies.
- 
- ```bash 
+ ``` 
  python3 -m venv venv
 ```
-Step 3: Install Dependencies
+### Step 3: Install Dependencies
 Install the required Python dependencies using pip.
 
-bash
-Copy
+```
 pip install -r requirements.txt
+```
 If requirements.txt does not exist, you can install the dependencies manually, including Django, djangorestframework, axios, and others.
 
-bash
-Copy
+```
+
 pip install Django djangorestframework
-Step 4: Set up the Database
+```
+### Step 4: Set up the Database
 Create and apply database migrations.
 
-bash
-Copy
+```
 python manage.py migrate
+```
 To create a superuser for the admin panel, run the following command:
-
-bash
-Copy
+```
 python manage.py createsuperuser
+```
 Follow the instructions to create an admin user.
 
-Step 5: Start the Development Server
+### Step 5: Start the Development Server
 Run the Django development server:
-
-bash
-Copy
+```
 python manage.py runserver
 The application will be running at http://127.0.0.1:8000/.
-
-Step 6: Frontend (React)
+```
+### Step 6: Frontend (React)
 Go to the frontend folder (if you have one) and install dependencies.
-bash
-Copy
+```
+
 cd frontend
 npm install
 Start the React development server.
-bash
-Copy
+
 npm start
+```
 This will start the React app on http://localhost:3000.
 
-API Endpoints
+
+## Screen shots
+![vehicle add](https://github.com/user-attachments/assets/a58579cc-fbfa-4be6-9c0f-1deeb9d6079f)
+![revenue](https://github.com/user-attachments/assets/7cb431b6-c484-4804-ae29-f767284cf798)
+![make payment](https://github.com/user-attachments/assets/fa2de325-3964-4d5d-8c0c-215797c6aee3)
+![issue created](https://github.com/user-attachments/assets/f904ef97-2056-4c40-b835-2330bc54826c)
+![dashboard](https://github.com/user-attachments/assets/b31c3b50-e9b8-4830-9e54-df1c952e3895)
+![componen added](https://github.com/user-attachments/assets/e47c3527-3376-4a3b-9c49-db376f448ee7)
+
+
+## API Endpoints
 GET /api/vehicles/
 Fetch a list of all vehicles in the system.
 
@@ -89,29 +96,27 @@ POST /api/issues/
 Create a new issue with selected vehicle, components, and labor cost.
 
 Request Body Example:
+```
 json
-Copy
 {
   "vehicle": 1,
   "components": [1, 2],
   "labor_cost": "500",
   "use_new_components": true
 }
+```
 GET /payment/{issue_id}/
 Redirects to the payment page for the specific issue.
 
-Database Management
+###  Database Management
 Flush the Database
 To remove all data from the database (while keeping the schema intact), run:
-
-bash
-Copy
+```
 python manage.py flush
 Reset the Database (Optional)
+```
 To drop the database and recreate tables, you can manually delete the SQLite database file (or drop the tables if using PostgreSQL or MySQL), then run:
-
-bash
-Copy
+```
 python manage.py migrate
 Code Overview
 Django App Structure
@@ -124,4 +129,4 @@ App.js: Contains the main React components for the application.
 components/IssueForm.js: The form where users can create issues.
 components/VehicleSelect.js: The component for selecting a vehicle.
 components/ComponentSelect.js: The component for selecting components.
-Contributing
+```
