@@ -115,7 +115,7 @@ To remove all data from the database (while keeping the schema intact), run:
 python manage.py flush
 Reset the Database (Optional)
 ```
-To drop the database and recreate tables, you can manually delete the SQLite database file (or drop the tables if using PostgreSQL or MySQL), then run:
+To drop the database and recreate tables, you can manually delete the SQLite database file, then run:
 ```
 python manage.py migrate
 Code Overview
